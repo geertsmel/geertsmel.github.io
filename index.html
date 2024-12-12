@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer Scrum</title>
     <style>
+        
         body {
         display: flex;
         align-items: center;
@@ -16,8 +17,11 @@
         h2{
             font-size: 50px;
         }
-        p {
-            font-size: 45px;
+        h3 {
+            font-size: 40px;
+        }
+        p, li {
+            font-size: 35px;
         }
 
         .clock {
@@ -109,8 +113,7 @@
         </div>
     </div>
     <div id="texte">
-        <h2>Mémento</h2>
-        <p id="log"></p>
+        <div id="log"></div>
     </div>
     <script>
         var inc = 1000;
@@ -142,19 +145,19 @@ function message(){
     
 
     if (minutes>= 0 && minutes< 10) {
-        log.innerHTML = "<ul><li>WHY : Sprint Goal</li><li>WHAT : Sélectionner les PBI</li></ul>";
+        log.innerHTML = "<h3>Sprint Planning</h3><ul><li>WHY : Sprint Goal [ST]</li><li>WHAT [Devs + PO] : Sélectionner les PBI</li><li>HOW [Devs]: Décomposer PBI (tâches)</li></ul>";
     }
     else if((minutes>= 10 && minutes< 12) ||(minutes>= 20 && minutes< 22)|| (minutes>= 30 && minutes< 32)|| (minutes>= 40 && minutes< 42)){
-        log.innerHTML = "Daily Scrum : Qui fait quoi ?";
+        log.innerHTML = "<h3>Daily Scrum [Devs]</h3><ul><li>Progression Sprint Goal</li><li>Adapter Sprint Backlog</li><li>Plan Journée : Qui fait quoi ?</li></ul>";
     }
-    else if((minutes>= 50 && minutes< 55)){
-        log.innerHTML = "Sprint Review : Feedback du client ? Mettre à jour le Product Backlog";
+    else if((minutes>= 50 && minutes< 54)){
+        log.innerHTML = "<h3>Sprint Review [ST + client]</h3><ul><li>Inspecter Incrément : Feedback du client ?</li><li>Mettre à jour le Product Backlog</li><li>Inspecter Progrès Product Goal</li></ul>";
     }
-    else if((minutes>= 55 && minutes< 58)){
-        log.innerHTML = "Sprint Retrospective : Bien été, mal été, améliorations ?";
+    else if((minutes>= 54 && minutes< 58)){
+        log.innerHTML = "<h3>Sprint Retrospective [ST]</h3><ul><li>Bien été ?</li><li>Mal été ?</li><li>Améliorations ?</li></ul><p>Individus, Interactions, Processus, Outils, DoD</p>";
     }
     else {
-        log.innerHTML = "Travaille !!";
+        log.innerHTML = "<h3>Travailler !! </h3><ul><li>Faire ce que tu as planifié de faire</li><li>Mettre à jour les tâches réalisées dans le Sprint Backlog</li></ul>";
     }
 }
 
