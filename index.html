@@ -1,1 +1,172 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Scrum</title>
+    <style>
+        body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #D9D7DD;
+        }
+
+        h2{
+            font-size: 50px;
+        }
+        p {
+            font-size: 45px;
+        }
+
+        .clock {
+        border-radius: 100%;
+        background-image: url("horloge.png");
+        background-size: contain;
+        font-family: "Montserrat";
+        border: 5px solid white;
+        box-shadow: inset 2px 3px 8px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .wrap {
+        overflow: hidden;
+        position: relative;
+        width: 900px;
+        height: 900px;
+        border-radius: 100%;
+        }
+
+        .minute,
+        .hour {
+        position: absolute;
+        height: 100px;
+        width: 6px;
+        margin: auto;
+        top: -27%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgb(232, 31, 31);
+        transform-origin: bottom center;
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        }
+
+        .minute {
+        position: absolute;
+        height: 330px;
+        width: 20px;
+        top: -38%;
+        left: 0;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+        transform: rotate(90deg);
+        }
+
+        .dot {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 100px;
+        background: white;
+        border: 2px solid #1b1b1b;
+        border-radius: 100px;
+        margin: auto;
+        z-index: 1;
+        }
+        #texte{
+            background-color: rgb(243, 246, 34);
+            box-shadow: 4px 4px 4px gray;
+            width: 400px;
+            height: 400px;
+            padding : 20px;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="time">
+        <label for="time">Le sprint a commencé à :</label>
+        <select name="time" id="time">
+            <option value="0">xh00</option>
+            <option value="10">xh10</option>
+            <option value="20">xh20</option>
+            <option value="30">xh30</option>
+            <option value="40">xh40</option>
+            <option value="50">xh50</option>
+        </select>
+        <button id="setMinute">OK</button>
+    </div>
+    <div class="clock">
+        <div class="wrap">
+            <span class="minute"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+    <div id="texte">
+        <h2>Mémento</h2>
+        <p id="log"></p>
+    </div>
+    <script>
+        var inc = 1000;
+        var time_start=0;
+
+clock();
+
+function clock() {
+    const date = new Date();
+
+    const minutes = date.getMinutes();
+    
+    const minute = (minutes - time_start) * 6;
+    
+    document.querySelector('.minute').style.transform = `rotate(${minute}deg)`
+}
+
+setInterval(clock, inc);
+setInterval(message, inc);
+setMinute.addEventListener("click", changeHorloge);
+
+function message(){
+    const date = new Date();
+    let minutes = Number(date.getMinutes()) - Number(time_start) ;
+    //console.log(minutes);
+    
+    minutes = (minutes<0)?minutes + 60 : minutes ;
+    //console.log(minutes);
+    
+
+    if (minutes>= 0 && minutes< 10) {
+        log.innerHTML = "<ul><li>WHY : Sprint Goal</li><li>WHAT : Sélectionner les PBI</li></ul>";
+    }
+    else if((minutes>= 10 && minutes< 12) ||(minutes>= 20 && minutes< 22)|| (minutes>= 30 && minutes< 32)|| (minutes>= 40 && minutes< 42)){
+        log.innerHTML = "Daily Scrum : Qui fait quoi ?";
+    }
+    else if((minutes>= 50 && minutes< 55)){
+        log.innerHTML = "Sprint Review : Feedback du client ? Mettre à jour le Product Backlog";
+    }
+    else if((minutes>= 55 && minutes< 58)){
+        log.innerHTML = "Sprint Retrospective : Bien été, mal été, améliorations ?";
+    }
+    else {
+        log.innerHTML = "Travaille !!";
+    }
+}
+
+function changeHorloge(){
+    let time_minute = time.children[1].value;
+    time_start = time_minute;
+    const clock_image = document.querySelector(".clock");
+    //console.log(time_minute);
+    let rotation_deg = time_minute * 6;
+    clock_image.style.transform = "rotate("+rotation_deg+"deg)";
+}
+
+    </script>
+</body>
+</html>
